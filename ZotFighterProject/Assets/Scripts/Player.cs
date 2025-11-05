@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     void onCrouch()
     {
         // *temporary vertical scaling for crouch
-        transform.localScale.y *= 0.5;
+        // transform.localScale.y *= 0.5;
     }
 
     // Update is called once per frame
