@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Player: move started");
         Vector2 input = context.ReadValue<Vector2>();
-        velocity.x = input.x * jumpFactor;
+        velocity.x = input.x * speed;
         // moving = true;
     }
 
