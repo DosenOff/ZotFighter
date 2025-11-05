@@ -2,26 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGlobals : MonoBehaviour
+public class EnemyGlobals : MonoBehaviour
 {
     public int health = 100;
-    public int direction = 1;
+    public int direction = -1;
 
     UI ui;
 
-    // apply damage to player health, then update ui
+    // apply damage to enemy health, then update ui
     public void TakeDamage(int damage)
     {
         health -= damage;
-        ui.UpdatePlayerHealth(health);
-        Debug.Log($"Player took {damage} damage. Health: {health}");
+        if (health <= 0) OnDeath();
+        ui.UpdateEnemyHealth(health);
+        Debug.Log($"Enemy took {damage} damage. Health: {health}");
     }
 
     // handle death
     public void OnDeath()
     {
         // TODO: handle death
-        Debug.Log("player died");
+        Debug.Log("enemy died");
     }
 
     // Start is called before the first frame update

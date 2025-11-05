@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public float hitDistance = 5f;
     public int attackDuration = 1000;
+    public int attackDamage = 5f;
 
     PlayerGlobals globals;
     bool attacking;
@@ -35,11 +36,18 @@ public class PlayerAttack : MonoBehaviour
     void HandleHit()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(globals.direction, 0), hitDistance);
-            if (hit)
+        if (hit)
+        {
+            GameObject hitObj = hit.transform.gameObject;
+            Debug.Log($"Player attacking {hitObj.name}");
+            EnemyGlobals hitGlobals = hitObj.GetComponent<EnemyGlobals>();
+            if (hitGlobals)
             {
-                GameObject hitObj = hit.transform.gameObject;
-                Debug.Log($"Player attacking {hitObj.name}");
+                Debug.Log("Player hit an enemy");
+                hitGlobals.TakeDamage(attackDamage);
+                attacking = false;
             }
+        }
     }
 
     // Update is called once per frame

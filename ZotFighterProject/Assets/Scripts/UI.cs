@@ -10,6 +10,9 @@ public class UI : MonoBehaviour
     RectTransform playerHealthBarRect;
     RectTransform enemyHealthBarRect;
 
+    float startingWidth;
+    float startingOffset;
+
     // updates player health bar with new health
     public void UpdatePlayerHealth(int newHealth)
     {
@@ -18,10 +21,10 @@ public class UI : MonoBehaviour
         Vector2 pos = playerHealthBarRect.anchoredPosition;
         Vector2 size = playerHealthBarRect.sizeDelta;
 
-        float newWidth = size.x * healthFraction;
-        float offset = (size.x - newWidth) / 2;
+        float newWidth = startingWidth * healthFraction;
+        float offset = (startingWidth - newWidth) / 2;
 
-        playerHealthBarRect.anchoredPosition = new Vector2(pos.x - offset, pos.y);
+        playerHealthBarRect.anchoredPosition = new Vector2(startingOffset - offset, pos.y);
         playerHealthBarRect.sizeDelta = new Vector2(newWidth, size.y);
     }
 
@@ -33,10 +36,13 @@ public class UI : MonoBehaviour
         Vector2 pos = enemyHealthBarRect.anchoredPosition;
         Vector2 size = enemyHealthBarRect.sizeDelta;
 
-        float newWidth = size.x * healthFraction;
-        float offset = (size.x - newWidth) / 2;
-        
-        enemyHealthBarRect.anchoredPosition = new Vector2(pos.x - offset, pos.y);
+        float newWidth = startingWidth * healthFraction;
+        float offset = (startingWidth - newWidth) / 2;
+
+        Debug.Log(newWidth);
+        Debug.Log(offset);
+        Debug.Log(startingOffset);
+        enemyHealthBarRect.anchoredPosition = new Vector2(offset - startingOffset, pos.y);
         enemyHealthBarRect.sizeDelta = new Vector2(newWidth, size.y);
     }
 
@@ -45,6 +51,9 @@ public class UI : MonoBehaviour
     {
         playerHealthBarRect = PlayerHealthBar.GetComponent<RectTransform>();
         enemyHealthBarRect = EnemyHealthBar.GetComponent<RectTransform>();
+
+        startingWidth = playerHealthBarRect.sizeDelta.x;
+        startingOffset = playerHealthBarRect.anchoredPosition.x;
     }
 
     // Update is called once per frame
