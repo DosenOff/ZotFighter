@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     Vector3 velocity;
     // BoxCollider2D collider;
 
-    // bool onGround = false;
+    // bool OnGround = false;
 
     // bool moving = false;
 
@@ -31,26 +31,26 @@ public class PlayerMovement : MonoBehaviour
             .With("Left", "<Keyboard>/a")
             .With("Right", "<Keyboard>/d");
 
-        moveAction.performed += onMove;
-        moveAction.canceled += onCancelMove;
+        moveAction.performed += OnMove;
+        moveAction.canceled += OnCancelMove;
         moveAction.Enable();
 
         // setup crouch input action
         var crouchAction = new InputAction("crouch", binding: "<Keyboard>/s");
 
-        crouchAction.performed += onCrouch;
-        crouchAction.canceled += onUnCrouch;
+        crouchAction.performed += OnCrouch;
+        crouchAction.canceled += OnUnCrouch;
         crouchAction.Enable();
 
         // // setup jump input action
         // var jumpAction = new InputAction("jump", binding: "<Keyboard>/w");
 
-        // jumpAction.performed += onJump;
+        // jumpAction.performed += OnJump;
         // jumpAction.Enable();
     }
 
     // starts movement of Player when move inputs are performed
-    void onMove(InputAction.CallbackContext context)
+    void OnMove(InputAction.CallbackContext context)
     {
         Debug.Log("Player: move started");
         Vector2 input = context.ReadValue<Vector2>();
@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // stops movement of Player when input is canceled
-    void onCancelMove(InputAction.CallbackContext context)
+    void OnCancelMove(InputAction.CallbackContext context)
     {
         Debug.Log("Player: move stopped");
         velocity.x = 0;
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // implement crouch animation
-    void onCrouch(InputAction.CallbackContext context)
+    void OnCrouch(InputAction.CallbackContext context)
     {
         // *temporary vertical scaling for crouch
         Vector3 scale = transform.localScale;
@@ -77,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // implement uncrouch animation when input is canceled
-    void onUnCrouch(InputAction.CallbackContext context)
+    void OnUnCrouch(InputAction.CallbackContext context)
     {
         // *temporary vertical scaling for crouch
         Vector3 scale = transform.localScale;
@@ -86,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // adds vertical velocity for jump
-    // void onJump(InputAction.CallbackContext context)
+    // void OnJump(InputAction.CallbackContext context)
     // {
     //     Debug.Log("Player: jumped");
     //     velocity.y = speed;

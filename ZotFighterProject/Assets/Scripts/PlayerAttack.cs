@@ -6,9 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     public float hitDistance = 5f;
+    public int attackDuration = 1000;
 
     PlayerGlobals globals;
     bool attacking;
+    float attackTimer;
     // bool attackType;
 
     // Start is called before the first frame update
@@ -18,27 +20,38 @@ public class PlayerAttack : MonoBehaviour
 
         // setup attack input action
         var attackAction = new InputAction("move", binding: "<Keyboard>/space");
-        attackAction.performed += onAttack;
+        attackAction.performed += OnAttack;
         attackAction.Enable();
     }
 
-    void onAttack(InputAction.CallbackContext context)
+    // implements player attack on input, sets the attacking state of the player to True
+    void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log("Player: attacked");
-        Debug.Log(globals.health);
-        Debug.Log(globals.direction);
         attacking = true;
+        attackTimer = attackDuration;
+    }
+
+    // calculates hit with any objects in direction of Player, then acts on the object if it is an enemy
+    void HandleHit()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(globals.direction, 0), hitDistance);
+            if (hit)
+            {
+                GameObject hitObj = hit.transform.gameObject;
+                Debug.Log($"Player attacking {hitObj.name}");
+            }
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(globals.direction, 0), hitDistance);
-        if (hit)
+        if (attacking)
         {
-            string objName = hit.transform.gameObject.name;
-            Debug.Log($"Player hit {objName} at distance {hit.distance}"); 
-            if (attacking) Debug.Log($"Player attacking {objName}");
+            // reduces attackTimer by time passed, sets attacking to false once timer is over
+            attackTimer -= Time.deltaTime;
+            if (attackTimer < 0) attacking = false;
+
+            HandleHit();
         }
     }
 }
