@@ -423,7 +423,8 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6978680349271416867, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
 --- !u!1 &5721590375755975956 stripped
 GameObject:
@@ -443,9 +444,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  jumpFactor: 5
-  GravConstant: 10
-  groundDistFactor: 0.01
 --- !u!70 &5721590375755975961
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
