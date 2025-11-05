@@ -7,7 +7,7 @@ public class PlayerAttack : MonoBehaviour
 {
     public float hitDistance = 5f;
     public int attackDuration = 1000;
-    public int attackDamage = 5f;
+    public int attackDamage = 5;
 
     PlayerGlobals globals;
     bool attacking;
