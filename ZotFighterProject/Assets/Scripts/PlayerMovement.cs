@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     // public float GravConstant = 10;
     // public float groundDistFactor = 0.01f;
 
+    PlayerGlobals globals;
     Vector3 velocity;
     // BoxCollider2D collider;
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        globals = GetComponent<PlayerGlobals>();
         // collider = GetComponent<BoxCollider2D>();
 
         // setup move input action
@@ -53,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Player: move started");
         Vector2 input = context.ReadValue<Vector2>();
         velocity.x = input.x * speed;
+        globals.direction = System.Math.Sign(input.x);
         // moving = true;
     }
 
