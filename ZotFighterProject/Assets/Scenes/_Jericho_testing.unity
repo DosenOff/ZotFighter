@@ -316,7 +316,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 4, y: 8}
   m_Direction: 0
 --- !u!114 &2134697596
 MonoBehaviour:
@@ -332,7 +332,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   aggressionDist: 10
-  fightingDist: 5
+  attackingDist: 6
+  backingDist: 10
+  attackCooldown: 1
+  chanceDisengage: 0.1
+  damageCooldown: 1
+  attackDamage: 5
+  hitDistance: 3
 --- !u!1001 &3869686619535393073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,6 +349,10 @@ PrefabInstance:
     - target: {fileID: 3869686618541631302, guid: 74236229778ae463a9842bb88e6d54df, type: 3}
       propertyPath: m_Name
       value: Oski
+      objectReference: {fileID: 0}
+    - target: {fileID: 3869686618541631302, guid: 74236229778ae463a9842bb88e6d54df, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3869686618541631304, guid: 74236229778ae463a9842bb88e6d54df, type: 3}
       propertyPath: m_RootOrder
@@ -388,6 +398,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3869686618541631305, guid: 74236229778ae463a9842bb88e6d54df, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b530d25d0dce0164eb8ad676156dfd81, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74236229778ae463a9842bb88e6d54df, type: 3}
 --- !u!1001 &5721590375755975955
@@ -411,15 +425,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3959279140565149140, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3959279140565149140, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3959279140565149140, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3959279140565149140, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
       propertyPath: m_LocalPosition.x
@@ -495,7 +509,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 2, y: 3}
   m_Direction: 0
 --- !u!50 &5721590375755975962
 Rigidbody2D:
