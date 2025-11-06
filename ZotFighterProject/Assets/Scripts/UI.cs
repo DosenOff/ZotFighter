@@ -38,10 +38,7 @@ public class UI : MonoBehaviour
 
         float newWidth = startingWidth * healthFraction;
         float offset = (startingWidth - newWidth) / 2;
-
-        Debug.Log(newWidth);
-        Debug.Log(offset);
-        Debug.Log(startingOffset);
+        
         enemyHealthBarRect.anchoredPosition = new Vector2(offset - startingOffset, pos.y);
         enemyHealthBarRect.sizeDelta = new Vector2(newWidth, size.y);
     }

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyGlobals : MonoBehaviour
 {
     public int health = 100;
     public int direction = -1;
+    public UnityAction OnDamage;
 
     UI ui;
 
@@ -13,6 +15,7 @@ public class EnemyGlobals : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        if (OnDamage != null) OnDamage();
         if (health <= 0) OnDeath();
         ui.UpdateEnemyHealth(health);
         Debug.Log($"Enemy took {damage} damage. Health: {health}");
