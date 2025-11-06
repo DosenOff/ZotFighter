@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class MiniSCSlugAnim : MonoBehaviour
 {
+    public GameObject miniSlugObject;
+    public GameObject miniSlugAnimObject;
+
     public int randomMin;
     public int randomMax;
 
@@ -16,6 +19,12 @@ public class MiniSCSlugAnim : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         randomSpawn = UnityEngine.Random.Range(randomMin, randomMax);
-        anim.SetBool($"Spawn {randomSpawn}", true);
+        anim.SetTrigger($"Spawn {randomSpawn}");
+    }
+
+    public void SlugActive()
+    {
+        miniSlugAnimObject.SetActive(false);
+        miniSlugObject.SetActive(true);
     }
 }
