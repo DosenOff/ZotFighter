@@ -216,6 +216,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   direction: 1
+--- !u!95 &598263205
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598263198}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 16496401342bb04448b879ce98094f22, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1208522079
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +500,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 38846005936927805, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1624969714628699220, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1624969714628699220, guid: 821ac65e036e04a9b895eb37fd4c4f68, type: 3}
       propertyPath: m_GravityScale
       value: 10

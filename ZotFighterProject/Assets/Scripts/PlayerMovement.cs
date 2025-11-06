@@ -6,16 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public int speed = 20;
-    // public float GravConstant = 10;
-    // public float groundDistFactor = 0.01f;
 
     PlayerGlobals globals;
     Vector2 velocity;
-    // BoxCollider2D collider;
-
-    // bool OnGround = false;
-
-    // bool moving = false;
 
     public int jumpFactor = 5;
     [SerializeField]
@@ -24,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerFeet feet;
     private Rigidbody2D rb;
+    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         globals = GetComponent<PlayerGlobals>();
         rb = GetComponent<Rigidbody2D>();
         feet = GetComponentInChildren<PlayerFeet>();
+        anim = GetComponent<Animator>();
 
         // collider = GetComponent<BoxCollider2D>();
 
@@ -51,12 +46,6 @@ public class PlayerMovement : MonoBehaviour
         crouchAction.performed += OnCrouch;
         crouchAction.canceled += OnUnCrouch;
         crouchAction.Enable();
-
-        // // setup jump input action
-        // var jumpAction = new InputAction("jump", binding: "<Keyboard>/w");
-
-        // jumpAction.performed += OnJump;
-        // jumpAction.Enable();
     }
 
     // starts movement of Player when move inputs are performed
@@ -66,7 +55,11 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = context.ReadValue<Vector2>();
         velocity.x = input.x * speed;
         globals.direction = System.Math.Sign(input.x);
-        // moving = true;
+
+        if (velocity.x > 0)
+            anim.SetBool("WalkingR", true);
+        else if (velocity.x < 0)
+            anim.SetBool("WalkingL", true);
     }
 
     // stops movement of Player when input is canceled
@@ -74,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Player: move stopped");
         velocity.x = 0;
-        // moving = false;
+        anim.SetBool("WalkingL", false);
+        anim.SetBool("WalkingR", false);
     }
 
     // implement crouch animation
@@ -101,24 +95,9 @@ public class PlayerMovement : MonoBehaviour
         transform.localPosition = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
     }
 
-    // void OnJump(InputAction.CallbackContext context)
-    // {
-    //     Debug.Log("Player: jumped");
-    //     velocity.y = speed;
-    // }
-
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     Debug.Log($"Player: collided with obj with tag {collision.gameObject.tag}");
-    // }
-
     void Update()
     {
         pressedSpace = Input.GetKey(KeyCode.Space);
-        // Debug.Log($"velocity: {velocity.x}, {velocity.y}");
-        //transform.position += velocity * Time.deltaTime;
-        // if (!onGround) velocity.y -= GravConstant * Time.deltaTime;
-        // if (moving) return;    
     }
 
     private void FixedUpdate()
