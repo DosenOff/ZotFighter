@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class MiniSCSlugAnim : MonoBehaviour
 {
-    public float randomMin;
-    public float randomMax;
+    public int randomMin;
+    public int randomMax;
 
     [SerializeField]
-    private float randomSpawn;
+    private int randomSpawn;
     private Animator anim;
 
     void Start()
