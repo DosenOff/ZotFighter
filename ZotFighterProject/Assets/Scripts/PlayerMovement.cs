@@ -6,22 +6,32 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public int speed = 20;
-    // public int jumpFactor = 5;
     // public float GravConstant = 10;
     // public float groundDistFactor = 0.01f;
 
     PlayerGlobals globals;
-    Vector3 velocity;
+    Vector2 velocity;
     // BoxCollider2D collider;
 
     // bool OnGround = false;
 
     // bool moving = false;
 
+    public int jumpFactor = 5;
+    [SerializeField]
+    private bool isGrounded = false;
+    private bool pressedSpace = false;
+
+    private PlayerFeet feet;
+    private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
         globals = GetComponent<PlayerGlobals>();
+        rb = GetComponent<Rigidbody2D>();
+        feet = GetComponentInChildren<PlayerFeet>();
+
         // collider = GetComponent<BoxCollider2D>();
 
         // setup move input action
@@ -74,6 +84,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.y *= 0.5f;
         transform.localScale = scale;
+
+        // ensures player is on same y-level
+        transform.localPosition = new Vector3(transform.position.x, transform.position.y - 3, transform.position.z);
     }
 
     // implement uncrouch animation when input is canceled
@@ -83,9 +96,11 @@ public class PlayerMovement : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.y *= 2.0f;
         transform.localScale = scale;
+
+        // ensures player is on same y-level
+        transform.localPosition = new Vector3(transform.position.x, transform.position.y + 3, transform.position.z);
     }
 
-    // adds vertical velocity for jump
     // void OnJump(InputAction.CallbackContext context)
     // {
     //     Debug.Log("Player: jumped");
@@ -97,12 +112,28 @@ public class PlayerMovement : MonoBehaviour
     //     Debug.Log($"Player: collided with obj with tag {collision.gameObject.tag}");
     // }
 
-    // Update is called once per frame
     void Update()
     {
+        pressedSpace = Input.GetKey(KeyCode.Space);
         // Debug.Log($"velocity: {velocity.x}, {velocity.y}");
-        transform.position += velocity * Time.deltaTime;
+        //transform.position += velocity * Time.deltaTime;
         // if (!onGround) velocity.y -= GravConstant * Time.deltaTime;
-        // if (moving) return;
+        // if (moving) return;    
+    }
+
+    private void FixedUpdate()
+    {
+        Jump();
+        rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+    }
+
+    void Jump()
+    {
+        isGrounded = feet.touchingGround;
+        if (isGrounded && pressedSpace)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpFactor);
+            Debug.Log(rb.velocity);
+        } 
     }
 }
