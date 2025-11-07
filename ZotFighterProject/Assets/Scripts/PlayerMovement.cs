@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerFeet feet;
     private Rigidbody2D rb;
     private Animator anim;
+    private SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         feet = GetComponentInChildren<PlayerFeet>();
         anim = GetComponent<Animator>();
+        sr = transform.Find("PlayerIcon").GetComponent<SpriteRenderer>();
 
         // collider = GetComponent<BoxCollider2D>();
 
@@ -57,9 +59,15 @@ public class PlayerMovement : MonoBehaviour
         globals.direction = System.Math.Sign(input.x);
 
         if (velocity.x > 0)
+        {
             anim.SetBool("WalkingR", true);
+            sr.flipX = false;
+        }
         else if (velocity.x < 0)
+        {
             anim.SetBool("WalkingL", true);
+            sr.flipX = true;
+        }
     }
 
     // stops movement of Player when input is canceled
@@ -102,17 +110,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Jump();
-        rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+        isGrounded = feet.touchingGround;
+        if (isGrounded)
+        {
+            rb.velocity = new Vector2(velocity.x, rb.velocity.y);
+            if (pressedSpace)
+                Jump();
+        }
     }
 
     void Jump()
     {
-        isGrounded = feet.touchingGround;
-        if (isGrounded && pressedSpace)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpFactor);
-            Debug.Log(rb.velocity);
-        } 
+        rb.velocity = new Vector2(rb.velocity.x, jumpFactor);
+        Debug.Log(rb.velocity);
     }
 }

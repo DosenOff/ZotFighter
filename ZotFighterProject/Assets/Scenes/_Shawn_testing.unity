@@ -254,6 +254,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  player: {fileID: 0}
+  speed: 5
+  slugImageL: {fileID: 1633422927}
+  slugImageR: {fileID: 1957214061}
 --- !u!61 &68793432
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1277,7 +1281,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b530d25d0dce0164eb8ad676156dfd81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d54ba77fe3e5e84e96663949498afa4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
